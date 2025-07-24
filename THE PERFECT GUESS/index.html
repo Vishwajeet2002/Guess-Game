@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Perfect Guess</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="header-controls">
+                <button class="control-btn sound-toggle" onclick="toggleSound()" title="Toggle Sound">
+                    <i class="fas fa-volume-up" id="sound-icon"></i>
+                </button>
+                <button class="control-btn dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <h1 class="game-title">🎯 The Perfect Guess</h1>
+            <p class="game-subtitle">Can you guess the secret number?</p>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="attempts">0</div>
+                <div class="stat-label">Attempts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="score">0</div>
+                <div class="stat-label">Score</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value timer" id="timer">00:00</div>
+                <div class="stat-label">Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="best-score">0</div>
+                <div class="stat-label">Best Score</div>
+            </div>
+        </div>
+
+        <div class="difficulty-selector">
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" onclick="setDifficulty('easy')" data-difficulty="easy">
+                    Easy (1-50)
+                </button>
+                <button class="difficulty-btn active" onclick="setDifficulty('medium')" data-difficulty="medium">
+                    Medium (1-100)
+                </button>
+                <button class="difficulty-btn" onclick="setDifficulty('hard')" data-difficulty="hard">
+                    Hard (1-500)
+                </button>
+            </div>
+        </div>
+
+        <div id="limited-attempts-display" class="limited-attempts" style="display: none;">
+            <strong>Limited Attempts Mode:</strong> <span id="remaining-attempts">10</span> attempts remaining
+        </div>
+
+        <div class="game-area">
+            <div class="feedback-message" id="feedback">Think of a number and make your first guess!</div>
+            
+            <div class="input-group">
+                <input 
+                    type="number" 
+                    class="guess-input" 
+                    id="guess-input" 
+                    placeholder="?" 
+                    min="1" 
+                    max="100"
+                    onkeypress="handleEnterKey(event)"
+                >
+                <button class="btn btn-primary" onclick="makeGuess()">
+                    <i class="fas fa-bullseye"></i> 
+                    <span class="btn-text">Guess</span>
+                </button>
+            </div>
+
+            <div class="game-controls">
+                <button class="btn btn-secondary" onclick="getHint()">
+                    <i class="fas fa-lightbulb"></i> 
+                    <span class="btn-text">Hint</span>
+                </button>
+                <button class="btn btn-secondary" onclick="newGame()">
+                    <i class="fas fa-redo"></i> 
+                    <span class="btn-text">New Game</span>
+                </button>
+                <button class="btn btn-secondary" onclick="toggleLimitedAttempts()">
+                    <i class="fas fa-hourglass-half" id="limited-icon"></i> 
+                    <span class="btn-text" id="limited-text">Limited Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="hint-section" class="hint-section" style="display: none;">
+            <div class="hint-text" id="hint-text"></div>
+        </div>
+
+        <div class="guess-history" id="history-container" style="display: none;">
+            <div class="history-title">Guess History</div>
+            <div id="guess-history"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
