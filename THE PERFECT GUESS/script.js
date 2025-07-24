@@ -31,11 +31,13 @@ const hintSection = document.getElementById("hint-section");
 const limitedAttemptsDisplay = document.getElementById(
   "limited-attempts-display"
 );
+
 const remainingAttemptsSpan = document.getElementById("remaining-attempts");
 const themeIcon = document.getElementById("theme-icon");
 const soundIcon = document.getElementById("sound-icon");
 const limitedText = document.getElementById("limited-text");
 const limitedIcon = document.getElementById("limited-icon");
+const bgMusic = document.getElementById("bg-music");
 
 // ===== GAME FUNCTIONS =====
 function startGame() {
@@ -61,6 +63,8 @@ function startGame() {
   } else {
     limitedAttemptsDisplay.style.display = "none";
   }
+  if (soundEnabled) bgMusic.play();
+  else bgMusic.pause();
 }
 
 function makeGuess() {
@@ -173,8 +177,15 @@ function updateBestScore(currentScore) {
 
 function toggleSound() {
   soundEnabled = !soundEnabled;
+
   soundIcon.classList.toggle("fa-volume-up", soundEnabled);
   soundIcon.classList.toggle("fa-volume-mute", !soundEnabled);
+
+  if (soundEnabled) {
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
+  }
 }
 
 function toggleDarkMode() {
